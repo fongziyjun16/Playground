@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-
 	server := gin.Default()
 
 	server.Static("/download", "./asset")
