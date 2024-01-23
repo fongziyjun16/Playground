@@ -48,7 +48,7 @@ func main() {
 		ctx.JSON(http.StatusOK, gin.H{
 			"version":   "1.3.31",
 			"pub_date":  "2024-01-23T12:29:53+01:00",
-			"url":       os.Getenv("HEROKU_APP_DEFAULT_DOMAIN_NAME") + "/server/download/vr-game-launcher_1.3.31_x64_en-US.msi.zip",
+			"url":       "https://update-test-dd55ddbe5912.herokuapp.com/download/vr-game-launcher_1.3.31_x64_en-US.msi.zip",
 			"signature": signature,
 			"notes":     "latest version",
 		})
