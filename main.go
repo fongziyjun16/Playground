@@ -21,7 +21,7 @@ func main() {
 }
 
 func checkUpdate(ctx *gin.Context) {
-	contraint, err := semver.NewConstraint("< 1.3.31")
+	constraint, err := semver.NewConstraint("< 1.3.31")
 	if err != nil {
 		fmt.Printf("New Constraint Error: %v \n", err)
 		ctx.Status(http.StatusNoContent)
@@ -33,7 +33,7 @@ func checkUpdate(ctx *gin.Context) {
 		ctx.Status(http.StatusNoContent)
 	}
 
-	if !contraint.Check(currentVersion) {
+	if !constraint.Check(currentVersion) {
 		ctx.Status(http.StatusNoContent)
 		return
 	}
