@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
-	"time"
 )
 
 func main() {
@@ -23,8 +22,6 @@ func main() {
 }
 
 func checkUpdate(ctx *gin.Context) {
-	time.Sleep(5 * time.Second)
-
 	contraint, err := semver.NewConstraint("< 1.3.31")
 	if err != nil {
 		fmt.Printf("New Constraint Error: %v \n", err)
