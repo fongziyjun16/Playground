@@ -73,7 +73,7 @@ func updateLatestVersion(ctx *gin.Context) {
 		return
 	}
 
-	ctx.String(http.StatusOK, "utf8", "Welcome to update latest version")
+	ctx.String(http.StatusOK, `Welcome to update latest version`)
 
 	//var latestVersion LatestVersion
 	//if err := ctx.ShouldBind(&latestVersion); err != nil {
