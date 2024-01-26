@@ -35,7 +35,7 @@ func checkLatestVersion(ctx *gin.Context) {
 		return
 	}
 
-	reqCurrVerString := ctx.Param("current_version")
+	reqCurrVerString := ctx.Param("currentVersion")
 	reqCurrVer, err := semver.NewVersion(reqCurrVerString)
 	if err != nil {
 		ctx.Status(http.StatusBadRequest)

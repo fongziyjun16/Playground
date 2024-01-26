@@ -10,7 +10,7 @@ func StartServer() {
 	server := gin.Default()
 
 	server.POST("/version", updateLatestVersion)
-	server.GET("/version", checkLatestVersion)
+	server.GET("/version/:currentVersion", checkLatestVersion)
 
 	port := os.Getenv("PORT")
 	if err := server.Run(":" + port); err != nil {
