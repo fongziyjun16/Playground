@@ -68,7 +68,7 @@ func checkLatestVersion(ctx *gin.Context) {
 func updateLatestVersion(ctx *gin.Context) {
 	authHeaderValue := ctx.GetHeader("Authorization")
 	fmt.Println(authHeaderValue)
-	if len(authHeaderValue) == 0 || authHeaderValue != "vr360action_vr-game-launcher_update_latest_version" {
+	if len(authHeaderValue) == 0 || authHeaderValue != "Bearer vr360action_vr-game-launcher_update_latest_version" {
 		ctx.Status(http.StatusForbidden)
 		return
 	}
