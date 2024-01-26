@@ -73,20 +73,18 @@ func updateLatestVersion(ctx *gin.Context) {
 		return
 	}
 
-	ctx.String(http.StatusOK, `Welcome to update latest version`)
-
-	//var latestVersion LatestVersion
-	//if err := ctx.ShouldBind(&latestVersion); err != nil {
-	//	ctx.Status(http.StatusBadRequest)
-	//	return
-	//}
-	//jsonFileContent, err := json.MarshalIndent(latestVersion, "", "")
-	//if err != nil {
-	//	ctx.Status(http.StatusInternalServerError)
-	//	return
-	//}
-	//if err := os.WriteFile("latest_version.json", jsonFileContent, 0644); err != nil {
-	//	ctx.Status(http.StatusInternalServerError)
-	//	return
-	//}
+	var latestVersion LatestVersion
+	if err := ctx.ShouldBind(&latestVersion); err != nil {
+		ctx.Status(http.StatusBadRequest)
+		return
+	}
+	jsonFileContent, err := json.MarshalIndent(latestVersion, "", "")
+	if err != nil {
+		ctx.Status(http.StatusInternalServerError)
+		return
+	}
+	if err := os.WriteFile("latest_version.json", jsonFileContent, 0644); err != nil {
+		ctx.Status(http.StatusInternalServerError)
+		return
+	}
 }
