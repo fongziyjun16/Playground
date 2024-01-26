@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/Masterminds/semver/v3"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -66,6 +67,7 @@ func checkLatestVersion(ctx *gin.Context) {
 
 func updateLatestVersion(ctx *gin.Context) {
 	authHeaderValue := ctx.GetHeader("Authorization")
+	fmt.Println(authHeaderValue)
 	if len(authHeaderValue) == 0 || authHeaderValue != "vr360action_vr-game-launcher_update_latest_version" {
 		ctx.Status(http.StatusForbidden)
 		return
