@@ -65,18 +65,26 @@ func checkLatestVersion(ctx *gin.Context) {
 }
 
 func updateLatestVersion(ctx *gin.Context) {
-	var latestVersion LatestVersion
-	if err := ctx.ShouldBind(&latestVersion); err != nil {
-		ctx.Status(http.StatusBadRequest)
+	authHeaderValue := ctx.GetHeader("Authorization")
+	if len(authHeaderValue) == 0 || authHeaderValue != "vr360action_vr-game-launcher_update_latest_version" {
+		ctx.Status(http.StatusForbidden)
 		return
 	}
-	jsonFileContent, err := json.MarshalIndent(latestVersion, "", "")
-	if err != nil {
-		ctx.Status(http.StatusInternalServerError)
-		return
-	}
-	if err := os.WriteFile("latest_version.json", jsonFileContent, 0644); err != nil {
-		ctx.Status(http.StatusInternalServerError)
-		return
-	}
+
+	ctx.String(http.StatusOK, "utf8", "Welcome to update latest version")
+
+	//var latestVersion LatestVersion
+	//if err := ctx.ShouldBind(&latestVersion); err != nil {
+	//	ctx.Status(http.StatusBadRequest)
+	//	return
+	//}
+	//jsonFileContent, err := json.MarshalIndent(latestVersion, "", "")
+	//if err != nil {
+	//	ctx.Status(http.StatusInternalServerError)
+	//	return
+	//}
+	//if err := os.WriteFile("latest_version.json", jsonFileContent, 0644); err != nil {
+	//	ctx.Status(http.StatusInternalServerError)
+	//	return
+	//}
 }
