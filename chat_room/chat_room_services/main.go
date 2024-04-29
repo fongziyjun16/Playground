@@ -3,12 +3,13 @@ package main
 import (
 	"example/chat_room_services/utils"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type TokenInfo struct {
@@ -89,12 +90,6 @@ func main() {
 	})
 
 	r.GET("/ws", func(context *gin.Context) {
-		//verificationResult, tokenInfo := tokenVerifier(context.GetHeader("Sec-WebSocket-Protocol"))
-		//if !verificationResult {
-		//	context.Status(http.StatusUnauthorized)
-		//	return
-		//}
-
 		conn, err := upgrader.Upgrade(context.Writer, context.Request, nil)
 		if err != nil {
 			fmt.Println(err)
@@ -107,5 +102,5 @@ func main() {
 		go client.readPump()
 	})
 
-	r.Run()
+	r.Run(":9090")
 }

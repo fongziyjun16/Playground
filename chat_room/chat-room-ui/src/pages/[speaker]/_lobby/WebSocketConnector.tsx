@@ -14,7 +14,7 @@ export default function WebSocketConnector() {
     wsEventEmitter.on("disconnected", () => setConnected(false));
 
     useEffect(() => {
-        initializeWSClient();
+        initializeWSClient(identification.token);
     }, []);
 
     return (

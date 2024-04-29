@@ -10,11 +10,11 @@ export const wsEventEmitter = mitt<WSEvents>();
 
 let wsClient: WebSocket | null = null;
 
-export const initializeWSClient = () => {
+export const initializeWSClient = (token: string) => {
     if (wsClient !== null) {
         return;
     }
-    wsClient = new WebSocket(`${process.env.WS_URL}`);
+    wsClient = new WebSocket(`${process.env.WS_URL}`, token);
     wsClient.onopen = () => wsEventEmitter.emit("connected");
     wsClient.onclose = () => wsEventEmitter.emit("disconnected");
     wsClient.onerror = console.log;

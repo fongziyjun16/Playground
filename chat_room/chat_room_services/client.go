@@ -2,10 +2,11 @@ package main
 
 import (
 	"bytes"
-	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gorilla/websocket"
 )
 
 const (
