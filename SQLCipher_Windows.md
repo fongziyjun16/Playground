@@ -67,6 +67,8 @@
 
 ## Test
 
+### Init
+
 `sqlite3 test.db`
 
 - `PRAGMA key='test123';`
@@ -75,3 +77,10 @@
 - `.quit`
 
 `test.db` needs key `test123`
+
+### Reset Key
+
+`PRAGMA rekey='test123';`
+
+After using old key, execute upper statement, reset key to `test123`
+
