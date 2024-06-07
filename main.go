@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -38,7 +39,7 @@ func main() {
 			return
 		}
 		hub.mu.Lock()
-		c.String(http.StatusOK, string(hub.count))
+		c.String(http.StatusOK, strconv.FormatUint(hub.count, 10))
 		hub.mu.Unlock()
 	})
 	port := os.Getenv("PORT")
