@@ -10,7 +10,7 @@ import (
 // clients.
 type Hub struct {
 	mu    sync.Mutex
-	count int64
+	count uint64
 
 	// Registered clients.
 	clients map[*Client]bool
