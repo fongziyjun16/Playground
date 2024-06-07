@@ -31,6 +31,16 @@ func main() {
 		go client.writePump()
 		go client.readPump()
 	})
+	r.GET("/count", func(c *gin.Context) {
+		auth := c.GetHeader("Authorization")
+		if auth != "nllWB61TGC" {
+			c.Status(http.StatusForbidden)
+			return
+		}
+		hub.mu.Lock()
+		c.String(http.StatusOK, string(hub.count))
+		hub.mu.Unlock()
+	})
 	port := os.Getenv("PORT")
 	if err := r.Run(":" + port); err != nil {
 		log.Println(fmt.Sprintf("Launch Services Error: %v", err))
