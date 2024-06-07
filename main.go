@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -29,5 +31,9 @@ func main() {
 		go client.writePump()
 		go client.readPump()
 	})
-	r.Run() // listen and serve on 0.0.0.0:8080
+	port := os.Getenv("PORT")
+	if err := r.Run(":" + port); err != nil {
+		log.Println(fmt.Sprintf("Launch Services Error: %v", err))
+		os.Exit(103)
+	}
 }
