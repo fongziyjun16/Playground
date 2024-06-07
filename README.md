@@ -1,2 +1,0 @@
-# Playground
-Do anything test
