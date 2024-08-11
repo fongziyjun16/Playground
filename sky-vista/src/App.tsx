@@ -17,11 +17,9 @@ export default function App() {
     };
 
     return (
-        <div className="w-screen h-screen p-[1px] flex justify-center items-center">
-            <div className="w-full h-full rounded-lg bg-purple-500 flex flex-col">
-                <div drag-region="true" className="w-full h-[64px]">
-                    Sky Vista
-                </div>
+        <div className="w-screen h-screen bg-purple-500">
+            <div drag-region="true" className="w-full h-[64px]">
+                Sky Vista
             </div>
         </div>
     );
