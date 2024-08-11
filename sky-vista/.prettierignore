@@ -1,0 +1,7 @@
+build
+node_modules
+src-tauri/target
+*.rs
+*.md
+Cargo.lock
+package-lock.json
