@@ -1,7 +1,7 @@
 pub fn launch() {
     match tauri::Builder::default().build(tauri::generate_context!()) {
         Ok(app) => {
-            let mut window_builder =
+            let window_builder =
                 tauri::WindowBuilder::new(&app, "main", tauri::WindowUrl::App("index.html".into()))
                     .focused(true)
                     .decorations(false)
