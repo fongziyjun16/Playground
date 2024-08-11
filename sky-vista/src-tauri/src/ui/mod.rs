@@ -5,14 +5,8 @@ pub fn launch() {
                 tauri::WindowBuilder::new(&app, "main", tauri::WindowUrl::App("index.html".into()))
                     .focused(true)
                     .decorations(false)
-                    // .transparent(true)
                     .title("Sky Vista")
                     .inner_size(400.0, 300.0);
-
-            #[cfg(target_os = "windows")]
-            {
-                window_builder = window_builder.transparent(true);
-            }
 
             match window_builder.build() {
                 Ok(window) => {
@@ -35,7 +29,37 @@ pub fn launch() {
                     }
 
                     #[cfg(target_os = "macos")]
-                    {}
+                    {
+                        match window.ns_window() {
+                            Ok(handle) => unsafe {
+                                use cocoa::base::id;
+                                use objc::{
+                                    class, msg_send,
+                                    runtime::{Object, NO, YES},
+                                    sel, sel_impl,
+                                };
+
+                                let handle = handle as id;
+
+                                let _: () = msg_send![handle, setHasShadow: YES];
+
+                                let content_view: *mut Object = msg_send![handle, contentView];
+                                let _: () = msg_send![content_view, setWantsLayer: YES];
+
+                                let layer: *mut Object = msg_send![content_view, layer];
+                                let _: () = msg_send![layer, setCornerRadius: 8.0];
+
+                                let clear_color: *mut Object =
+                                    msg_send![class!(NSColor), clearColor];
+                                let _: () = msg_send![content_view, setBackgroundColor:clear_color];
+                                let _: () = msg_send![handle, setOpaque: NO];
+                                let _: () = msg_send![handle, setBackgroundColor:clear_color];
+                            },
+                            Err(err) => {
+                                log::error!("Fail to get main window ns handle, Error: {:?}", err)
+                            }
+                        }
+                    }
                 }
                 Err(err) => log::error!("Fail to build main window, Error: {:?}", err),
             }
